@@ -6,7 +6,6 @@ from tkinter.ttk import *
 class Menubar:
     def __init__(self, container):
         self.fileFrame = Frame(container)
-        print(self.fileFrame.configure().keys())
         self.fileFrame.pack()
         self.homeFrame = Frame(container)
         self.viewFrame = Frame(container)
