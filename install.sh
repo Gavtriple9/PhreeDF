@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "Make sure venv is installed!"
+echo "Now building python virtual enviroment"
 if [ -d "./venv" ]; then
     source ./venv/bin/activate
     pip uninstall -y -r <(pip freeze)
