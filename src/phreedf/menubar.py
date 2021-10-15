@@ -1,4 +1,4 @@
-from tkinter import *
+import tkinter as tk
 from tkinter import ttk
 
 import os
@@ -6,12 +6,6 @@ from PIL import ImageTk, Image
 
 class Menubar:
     def __init__(self, container):
-
-        pathToAppIcon = os.path.join(os.path.split(os.path.abspath(__file__))[0], '../icon/icon.png')
-        img = Image.open(pathToAppIcon)
-        img = img.resize((10,10))
-        icon = ImageTk.PhotoImage(img)
-        
 
         self.fileFrame = ttk.Frame(container)
         self.homeFrame = ttk.Frame(container, height=200, width=100)
@@ -26,7 +20,7 @@ class Menubar:
         self.formatFrame = ttk.Frame(container)
         
         container.add(self.fileFrame, text='File')
-        container.add(self.homeFrame, text='Home', image=icon)
+        container.add(self.homeFrame, text='Home')
         container.add(self.viewFrame, text='View')
         container.add(self.commentFrame, text='Comment')
         container.add(self.protectFrame, text='Protect')
