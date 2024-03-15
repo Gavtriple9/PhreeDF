@@ -1,0 +1,9 @@
+[submodule "docs/doxygen-awesome-css"]
+	path = docs/doxygen-awesome-css
+	url = git@github.com:jothepro/doxygen-awesome-css.git
+[submodule "lib/wxWidgets"]
+	path = lib/wxWidgets
+	url = git@github.com:wxWidgets/wxWidgets.git
+[submodule "lib/eigen"]
+	path = lib/eigen
+	url = https://gitlab.com/libeigen/eigen.git

@@ -1,6 +1,0 @@
-numpy
-pdfplumber
-PyPDF2
-pytesseract
-Pillow
-tkPDFViewer
