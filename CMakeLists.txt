@@ -76,5 +76,23 @@ target_include_directories(
 string(TOLOWER ${PROJECT_NAME}/version.h VERSION_HEADER_LOCATION)
 
 
+# ---- Generate Documentation ----
+find_package(Doxygen
+             REQUIRED dot
+             OPTIONAL_COMPONENTS mscgen dia)
 
+if (DOXYGEN_FOUND)
+  message(STATUS "Doxygen found")
+  set(DOXYGEN_GENERATE_HTML YES)
+  set(DOXYGEN_GENERATE_MAN NO)
+  set(DOXYGEN_GENERATE_LATEX NO)
+
+  doxygen_add_docs(
+      doxygen
+      ${PROJECT_SOURCE_DIR}/docs
+      COMMENT "Generate html documentation"
+  )
+else()
+  message(STATUS "Doxygen not found")
+endif()
 

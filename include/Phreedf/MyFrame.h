@@ -15,3 +15,4 @@ public:
 private:
     // This class handles events
     DECLARE_EVENT_TABLE()
+};
