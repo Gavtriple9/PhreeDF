@@ -4,4 +4,3 @@
 namespace phre
 {
     bool is_installed();
-} // namespace phre

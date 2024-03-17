@@ -12,4 +12,3 @@ bool MyApp::OnInit()
 }
 
 // Give wxWidgets the means to create a MyApp object
-IMPLEMENT_APP(MyApp)
