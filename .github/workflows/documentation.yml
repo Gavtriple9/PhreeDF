@@ -2,9 +2,14 @@
 name: Documentation
 
 on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:
+      - main
   push:
-    tags:
-      - "*"
+    branches:
+      - 'feature/documentation'
+      - 'documentation/**'
 
 env:
   CPM_SOURCE_CACHE: ${{ github.workspace }}/cpm_modules
