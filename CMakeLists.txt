@@ -14,7 +14,7 @@ cmake_minimum_required(VERSION 3.14...3.22)
 # Note: update this to your new project's name and version
 project(
   phreedf
-  VERSION 1.0
+  VERSION 0.1.0
   LANGUAGES CXX
 )
 
@@ -86,11 +86,17 @@ if (DOXYGEN_FOUND)
   set(DOXYGEN_GENERATE_HTML YES)
   set(DOXYGEN_GENERATE_MAN NO)
   set(DOXYGEN_GENERATE_LATEX NO)
+  set(DOXYGEN_RECURSIVE YES)
+  set(DOXYGEN_EXCLUDE_PATTERNS 
+      "*/lib/*"
+      "*/build/*"
+      "*/docs/doxygen-awesome-css/*"
+  )
+  set(USE_MDFILE_AS_MAINPAGE YES)
+  set(PROJECT_LOGO "${PROJECT_SOURCE_DIR}/logo.png")
 
   doxygen_add_docs(
-      doxygen
-      ${PROJECT_SOURCE_DIR}/docs
-      COMMENT "Generate html documentation"
+    docs ${PROJECT_SOURCE_DIR}
   )
 else()
   message(STATUS "Doxygen not found")

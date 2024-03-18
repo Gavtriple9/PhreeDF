@@ -4,8 +4,14 @@
 PROJECT_NAME = @DOXYGEN_PROJECT_NAME@
 PROJECT_NUMBER = @DOXYGEN_PROJECT_VERSION@
 
+GENERATE_TREEVIEW      = YES # optional. Also works without treeview
+DISABLE_INDEX = NO
+FULL_SIDEBAR = NO
+HTML_EXTRA_STYLESHEET  = doxygen-awesome-css/doxygen-awesome.css
+HTML_COLORSTYLE        = LIGHT # required with Doxygen >= 1.9.5
+
 # Add icon to the top left corner
-PROJECT_LOGO = logo.png
+PROJECT_LOGO = @DOXYGEN_PROJECT_ROOT@/logo.png
 
 # Add sources
 INPUT = @DOXYGEN_PROJECT_ROOT@/README.md @DOXYGEN_PROJECT_ROOT@/include @DOXYGEN_PROJECT_ROOT@/docs/pages
@@ -13,10 +19,8 @@ EXTRACT_ALL = YES
 RECURSIVE = YES
 OUTPUT_DIRECTORY = @DOXYGEN_OUTPUT_DIRECTORY@
 
-HTML_EXTRA_STYLESHEET = doxygen-awesome-css/doxygen-awesome.css
-
 # Use the README as a main page
-USE_MDFILE_AS_MAINPAGE = @DOXYGEN_PROJECT_ROOT@/README.md
+# USE_MDFILE_AS_MAINPAGE = @DOXYGEN_PROJECT_ROOT@/README.md
 
 # set relative include paths
 FULL_PATH_NAMES = YES
