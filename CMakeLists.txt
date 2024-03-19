@@ -85,8 +85,7 @@ string(TOLOWER ${PROJECT_NAME}/version.h VERSION_HEADER_LOCATION)
 
 # ---- Generate Documentation ----
 find_package(Doxygen
-             REQUIRED dot
-             OPTIONAL_COMPONENTS mscgen dia)
+             REQUIRED dot)
 
 if (DOXYGEN_FOUND)
   message(STATUS "Doxygen found")
