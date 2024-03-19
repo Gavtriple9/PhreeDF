@@ -61,8 +61,13 @@ endif()
 
 # Note: for header-only libraries change all PUBLIC flags to INTERFACE and create an interface
 # add_library(${PROJECT_NAME} INTERFACE)
-add_executable(${PROJECT_NAME} MACOSX_BUNDLE ${HEADERS} ${SOURCES} ${APP_ICON_MACOSX})
-set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 17 MACOSX_BUNDLE_INFO_PLIST ${PROJECT_SOURCE_DIR}/resources/Info.plist.in)
+if (APPLE)
+  add_executable(${PROJECT_NAME} MACOSX_BUNDLE ${HEADERS} ${SOURCES} ${APP_ICON_MACOSX})
+  set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 17 MACOSX_BUNDLE_INFO_PLIST ${PROJECT_SOURCE_DIR}/resources/Info.plist.in)
+else()
+  add_executable(${PROJECT_NAME} ${HEADERS} ${SOURCES})
+  set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 17)
+endif()
 
 # being a cross-platform target, we enforce standards conformance on MSVC
 target_compile_options(${PROJECT_NAME} PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/permissive->")
