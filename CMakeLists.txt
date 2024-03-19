@@ -39,23 +39,30 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 # Note: globbing sources is considered bad practice as CMake's generators may not detect new files
 # automatically. Keep that in mind when changing files, or explicitly mention them here.
 set(HEADERS 
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/phreedf.h"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/phreedf/Core.h"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/phreedf/MyApp.h"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/phreedf/MyFrame.h"
+  "${PROJECT_SOURCE_DIR}/include/phreedf.h"
+  "${PROJECT_SOURCE_DIR}/include/phreedf/Core.h"
+  "${PROJECT_SOURCE_DIR}/include/phreedf/MyApp.h"
+  "${PROJECT_SOURCE_DIR}/include/phreedf/MyFrame.h"
 )
 
 set(SOURCES 
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/MyApp.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/MyFrame.cpp"
+  "${PROJECT_SOURCE_DIR}/src/MyApp.cpp"
+  "${PROJECT_SOURCE_DIR}/src/MyFrame.cpp"
 )
+
+# --- Add the app icon ---
+if (APPLE)
+  set(MACOSX_BUNDLE_ICON_FILE ${PROJECT_SOURCE_DIR}/resources/phreedf)
+  set(APP_ICON_MACOSX ${PROJECT_SOURCE_DIR}/resources/phreedf.icns) 
+  set_source_files_properties(${APP_ICON_MACOSX} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources") 
+endif()
 
 # ---- Create library ----
 
 # Note: for header-only libraries change all PUBLIC flags to INTERFACE and create an interface
 # add_library(${PROJECT_NAME} INTERFACE)
-add_executable(${PROJECT_NAME} ${HEADERS} ${SOURCES})
-set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 17)
+add_executable(${PROJECT_NAME} MACOSX_BUNDLE ${HEADERS} ${SOURCES} ${APP_ICON_MACOSX})
+set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 17 MACOSX_BUNDLE_INFO_PLIST ${PROJECT_SOURCE_DIR}/resources/Info.plist.in)
 
 # being a cross-platform target, we enforce standards conformance on MSVC
 target_compile_options(${PROJECT_NAME} PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/permissive->")

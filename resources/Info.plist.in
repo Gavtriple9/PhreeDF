@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist SYSTEM "file://localhost/System/Library/DTDs/PropertyList.dtd">
+<plist version="0.9">
+	<dict>
+		<key>CFBundleInfoDictionaryVersion</key>
+		<string>6.0</string>
+		<key>CFBundleIdentifier</key>
+		<string>com.gavinsroberts.PhreeDF</string>
+		<key>CFBundleDevelopmentRegion</key>
+		<string>English</string>
+		<key>CFBundleExecutable</key>
+		<string>PhreeDF</string>
+		<key>CFBundleIconFile</key>
+		<string>phreedf.icns</string>
+		<key>CFBundleName</key>
+		<string>PhreeDF</string>
+		<key>CFBundlePackageType</key>
+		<string>APPL</string>
+		<key>CFBundleSignature</key>
+		<string>gavinsroberts.PhreeDF</string>
+		<key>CFBundleVersion</key>
+		<string>1.0</string>
+		<key>CFBundleShortVersionString</key>
+		<string>1.0</string>
+		<key>CFBundleGetInfoString</key>
+		<string>PhreeDF version 1.0, (c) 2024 Gavin Roberts</string>
+		<key>CFBundleLongVersionString</key>
+		<string>PhreeDF version 1.0, (c) 2024 Gavin Roberts</string>
+		<key>NSHumanReadableCopyright</key>
+		<string>Copyright 2024 Gavin Roberts</string>
+		<key>LSRequiresCarbon</key>
+		<true/>
+		<key>CSResourcesFileMapped</key>
+		<true/>
+	</dict>
+</plist>
