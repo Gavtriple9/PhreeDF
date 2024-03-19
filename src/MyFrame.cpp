@@ -5,12 +5,14 @@ MyFrame::MyFrame(const wxString &title)
     : wxFrame(NULL, wxID_ANY, title)
 {
     wxIcon icon;
-
     icon.CopyFromBitmap(wxBitmap(logo_xpm));
-    printf("icon: %d x %d\n", icon.GetWidth(), icon.GetHeight());
 
     // Set the frame icon
     SetIcon(icon);
+
+    wxClientDC dc(this);
+
+    dc.DrawIcon(icon, 200, 200);
     // Create a menu bar
     wxMenu *fileMenu = new wxMenu;
     // The “About” item should be in the help menu
@@ -20,7 +22,10 @@ MyFrame::MyFrame(const wxString &title)
     fileMenu->Append(wxID_EXIT, wxT("E & xit\tAlt-X"),
                      wxT("Quit this program"));
 
-    wxButton *button = new wxButton(this, wxID_OK, wxT("OK"), wxPoint(200, 200));
+    wxStaticBox *staticBox = new wxStaticBox(this, wxID_STATIC,
+                                             wxT("& Static box"), wxDefaultPosition, wxSize(100, 100));
+
+    wxButton *button = new wxButton(staticBox, wxID_OK, wxT("OK"), wxPoint(10, 10), wxDefaultSize, wxBU_EXACTFIT);
     // Now append the freshly created menu to the menu bar...
     wxMenuBar *menuBar = new wxMenuBar();
     menuBar->Append(fileMenu, wxT("& File"));
@@ -60,9 +65,11 @@ void MyFrame::OnButtonOK(wxCommandEvent &event)
 }
 
 // Event table for MyFrame
+// clang-format off
 BEGIN_EVENT_TABLE(MyFrame, wxFrame)
-EVT_MENU(wxID_ABOUT, MyFrame::OnAbout)
-EVT_MENU(wxID_EXIT, MyFrame::OnQuit)
-EVT_SIZE(MyFrame::OnSize)
-EVT_BUTTON(wxID_OK, MyFrame::OnButtonOK)
+    EVT_MENU(wxID_ABOUT, MyFrame::OnAbout)
+    EVT_MENU(wxID_EXIT, MyFrame::OnQuit)
+    EVT_SIZE(MyFrame::OnSize)
+    EVT_BUTTON(wxID_OK, MyFrame::OnButtonOK)
 END_EVENT_TABLE()
+// clang-format on

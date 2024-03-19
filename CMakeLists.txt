@@ -14,7 +14,7 @@ cmake_minimum_required(VERSION 3.14...3.22)
 # Note: update this to your new project's name and version
 project(
   phreedf
-  VERSION 1.0
+  VERSION 0.1.0
   LANGUAGES CXX
 )
 
@@ -50,12 +50,26 @@ set(SOURCES
   "${CMAKE_CURRENT_SOURCE_DIR}/src/MyFrame.cpp"
 )
 
+
+
+# --- Add the app icon ---
+if (APPLE)
+  set(MACOSX_BUNDLE_ICON_FILE ${PROJECT_SOURCE_DIR}/resources/phreedf)
+  set(APP_ICON_MACOSX ${PROJECT_SOURCE_DIR}/resources/phreedf.icns) 
+  set_source_files_properties(${APP_ICON_MACOSX} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources") 
+endif()
+
 # ---- Create library ----
 
 # Note: for header-only libraries change all PUBLIC flags to INTERFACE and create an interface
 # add_library(${PROJECT_NAME} INTERFACE)
-add_executable(${PROJECT_NAME} ${HEADERS} ${SOURCES})
-set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 17)
+if (APPLE)
+  add_executable(${PROJECT_NAME} MACOSX_BUNDLE ${HEADERS} ${SOURCES} ${APP_ICON_MACOSX})
+  set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 17 MACOSX_BUNDLE_INFO_PLIST ${PROJECT_SOURCE_DIR}/resources/Info.plist.in)
+else()
+  add_executable(${PROJECT_NAME} ${HEADERS} ${SOURCES})
+  set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 17)
+endif()
 
 # being a cross-platform target, we enforce standards conformance on MSVC
 target_compile_options(${PROJECT_NAME} PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/permissive->")
@@ -78,19 +92,24 @@ string(TOLOWER ${PROJECT_NAME}/version.h VERSION_HEADER_LOCATION)
 
 # ---- Generate Documentation ----
 find_package(Doxygen
-             REQUIRED dot
-             OPTIONAL_COMPONENTS mscgen dia)
+             REQUIRED dot)
 
 if (DOXYGEN_FOUND)
   message(STATUS "Doxygen found")
   set(DOXYGEN_GENERATE_HTML YES)
   set(DOXYGEN_GENERATE_MAN NO)
   set(DOXYGEN_GENERATE_LATEX NO)
+  set(DOXYGEN_RECURSIVE YES)
+  set(DOXYGEN_EXCLUDE_PATTERNS 
+      "*/lib/*"
+      "*/build/*"
+      "*/docs/doxygen-awesome-css/*"
+  )
+  set(USE_MDFILE_AS_MAINPAGE YES)
+  set(PROJECT_LOGO "${PROJECT_SOURCE_DIR}/logo.png")
 
   doxygen_add_docs(
-      doxygen
-      ${PROJECT_SOURCE_DIR}/docs
-      COMMENT "Generate html documentation"
+    docs ${PROJECT_SOURCE_DIR}
   )
 else()
   message(STATUS "Doxygen not found")
