@@ -39,16 +39,18 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 # Note: globbing sources is considered bad practice as CMake's generators may not detect new files
 # automatically. Keep that in mind when changing files, or explicitly mention them here.
 set(HEADERS 
-  "${PROJECT_SOURCE_DIR}/include/phreedf.h"
-  "${PROJECT_SOURCE_DIR}/include/phreedf/Core.h"
-  "${PROJECT_SOURCE_DIR}/include/phreedf/MyApp.h"
-  "${PROJECT_SOURCE_DIR}/include/phreedf/MyFrame.h"
+  "${CMAKE_CURRENT_SOURCE_DIR}/include/phreedf.h"
+  "${CMAKE_CURRENT_SOURCE_DIR}/include/phreedf/Core.h"
+  "${CMAKE_CURRENT_SOURCE_DIR}/include/phreedf/MyApp.h"
+  "${CMAKE_CURRENT_SOURCE_DIR}/include/phreedf/MyFrame.h"
 )
 
 set(SOURCES 
-  "${PROJECT_SOURCE_DIR}/src/MyApp.cpp"
-  "${PROJECT_SOURCE_DIR}/src/MyFrame.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/src/MyApp.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/src/MyFrame.cpp"
 )
+
+
 
 # --- Add the app icon ---
 if (APPLE)
