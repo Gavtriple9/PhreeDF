@@ -1,6 +1,9 @@
 # PhreeDF 
 > A free pdf viewer
 
+# Project Site
+[https://gavtriple9.github.io/PhreeDF/](https://gavtriple9.github.io/PhreeDF/)
+
 # Installation
 1. clone phreedf using `git clone git@github.com:Gavtriple9/PhreeDF.git`
 1. `cd phreedf` into phreedf 
