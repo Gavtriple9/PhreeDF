@@ -1,5 +1,9 @@
+#pragma once
+
 #include "Core.h"
-#include "MyFrame.h"
+#include "MainFrame.h"
+#include <spdlog/sinks/basic_file_sink.h>
+#include <cstdlib>
 
 // Declare the application class
 class MyApp : public wxApp

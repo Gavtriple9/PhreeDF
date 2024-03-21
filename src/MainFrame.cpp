@@ -1,7 +1,7 @@
-#include <phreedf/MyFrame.h>
+#include <phreedf/MainFrame.h>
 #include "logo.xpm"
 
-MyFrame::MyFrame(const wxString &title)
+MainFrame::MainFrame(const wxString &title)
     : wxFrame(NULL, wxID_ANY, title)
 {
     wxIcon icon;
@@ -37,7 +37,7 @@ MyFrame::MyFrame(const wxString &title)
     SetStatusText(wxT("Welcome to wxWidgets !"));
 }
 
-void MyFrame::OnAbout(wxCommandEvent &event)
+void MainFrame::OnAbout(wxCommandEvent &event)
 {
     wxString msg;
     msg.Printf(wxT("Hello and welcome to % s"),
@@ -46,12 +46,12 @@ void MyFrame::OnAbout(wxCommandEvent &event)
                  wxOK | wxICON_INFORMATION, this);
 }
 
-void MyFrame::OnQuit(wxCommandEvent &event)
+void MainFrame::OnQuit(wxCommandEvent &event)
 {
     // Destroy the frame
     Close();
 }
-void MyFrame::OnSize(wxSizeEvent &event)
+void MainFrame::OnSize(wxSizeEvent &event)
 {
     wxSize size = event.GetSize();
     wxString msg;
@@ -59,17 +59,18 @@ void MyFrame::OnSize(wxSizeEvent &event)
     SetStatusText(msg);
 }
 
-void MyFrame::OnButtonOK(wxCommandEvent &event)
+void MainFrame::OnButtonOK(wxCommandEvent &event)
 {
     wxMessageBox(wxT("OK button clicked"), wxT("OK"), wxOK, this);
+    spdlog::debug("Button clicked");
 }
 
-// Event table for MyFrame
+// Event table for MainFrame
 // clang-format off
-BEGIN_EVENT_TABLE(MyFrame, wxFrame)
-    EVT_MENU(wxID_ABOUT, MyFrame::OnAbout)
-    EVT_MENU(wxID_EXIT, MyFrame::OnQuit)
-    EVT_SIZE(MyFrame::OnSize)
-    EVT_BUTTON(wxID_OK, MyFrame::OnButtonOK)
+BEGIN_EVENT_TABLE(MainFrame, wxFrame)
+    EVT_MENU(wxID_ABOUT, MainFrame::OnAbout)
+    EVT_MENU(wxID_EXIT, MainFrame::OnQuit)
+    EVT_SIZE(MainFrame::OnSize)
+    EVT_BUTTON(wxID_OK, MainFrame::OnButtonOK)
 END_EVENT_TABLE()
 // clang-format on

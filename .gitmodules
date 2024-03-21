@@ -4,3 +4,9 @@
 [submodule "docs/doxygen-awesome-css"]
 	path = docs/doxygen-awesome-css
 	url = git@github.com:jothepro/doxygen-awesome-css.git
+[submodule "lib/spdlog"]
+	path = lib/spdlog
+	url = git@github.com:gabime/spdlog.git
+[submodule "lib/podofo"]
+	path = lib/podofo
+	url = git@github.com:podofo/podofo.git

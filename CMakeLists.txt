@@ -9,6 +9,11 @@
 
 cmake_minimum_required(VERSION 3.14...3.22)
 
+if(CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+  # Suppress the warning about writable string literals
+  add_compile_options(-Wno-writable-strings)
+endif()
+
 # ---- Project ----
 
 # Note: update this to your new project's name and version
@@ -18,19 +23,25 @@ project(
   LANGUAGES CXX
 )
 
+set(TARGET ${PROJECT_NAME})
+
 # ---- Include guards ----
 
-if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
+if("${CMAKE_SOURCE_DIR}" STREQUAL "${CMAKE_BINARY_DIR}")
   message(
     FATAL_ERROR
-      "In-source builds not allowed. Please make a new directory (called a build directory) and run CMake from there."
+    "In-source builds not allowed. Please make a new directory (called a build directory) and run CMake from there."
   )
 endif()
 
 # ---- Add dependencies ----
 
-# Add the directory containing CMakeLists.txt for the third-party libraries
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/lib/wxWidgets)
+# wxWidgets
+add_library(wxWidgets_core STATIC IMPORTED)
+set_target_properties(wxWidgets_core PROPERTIES IMPORTED_LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/libs/wxWidgets/buildurx/lib/libwx_baseu-3.3.a)
+
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/lib/spdlog)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/lib/podofo)
 
 # ---- Add source files ----
 
@@ -41,15 +52,14 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(HEADERS 
   "${CMAKE_CURRENT_SOURCE_DIR}/include/phreedf.h"
   "${CMAKE_CURRENT_SOURCE_DIR}/include/phreedf/Core.h"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/phreedf/MyApp.h"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/phreedf/MyFrame.h"
+  "${CMAKE_CURRENT_SOURCE_DIR}/include/phreedf/PhreedfApp.h"
+  "${CMAKE_CURRENT_SOURCE_DIR}/include/phreedf/MainFrame.h"
 )
 
 set(SOURCES 
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/MyApp.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/MyFrame.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/src/PhreedfApp.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/src/MainFrame.cpp"
 )
-
 
 
 # --- Add the app icon ---
@@ -62,24 +72,33 @@ endif()
 # ---- Create library ----
 
 # Note: for header-only libraries change all PUBLIC flags to INTERFACE and create an interface
-# add_library(${PROJECT_NAME} INTERFACE)
+# add_library(${TARGET} INTERFACE)
 if (APPLE)
-  add_executable(${PROJECT_NAME} MACOSX_BUNDLE ${HEADERS} ${SOURCES} ${APP_ICON_MACOSX})
-  set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 17 MACOSX_BUNDLE_INFO_PLIST ${PROJECT_SOURCE_DIR}/resources/Info.plist.in)
+  add_executable(${TARGET} MACOSX_BUNDLE ${HEADERS} ${SOURCES} ${APP_ICON_MACOSX})
+  set_target_properties(${TARGET} PROPERTIES CXX_STANDARD 17 MACOSX_BUNDLE_INFO_PLIST ${PROJECT_SOURCE_DIR}/resources/Info.plist.in)
 else()
-  add_executable(${PROJECT_NAME} ${HEADERS} ${SOURCES})
-  set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 17)
+  add_executable(${TARGET} ${HEADERS} ${SOURCES})
+  set_target_properties(${TARGET} PROPERTIES CXX_STANDARD 17)
 endif()
 
 # being a cross-platform target, we enforce standards conformance on MSVC
-target_compile_options(${PROJECT_NAME} PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/permissive->")
+target_compile_options(${TARGET} PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/permissive->")
 
 # Link dependencies
-target_link_libraries(${PROJECT_NAME} PRIVATE wx::net wx::core wx::base)
+target_link_libraries(${TARGET} PRIVATE 
+  wxWidgets_base
+
+  spdlog::spdlog 
+  $<$<BOOL:${MINGW}>:ws2_32>
+
+  ${PODOFO_LIBRARIES}
+)
 
 target_include_directories(
-  ${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
-                         $<INSTALL_INTERFACE:include/${PROJECT_NAME}-${PROJECT_VERSION}>
+  ${TARGET} PUBLIC  $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
+                    $<INSTALL_INTERFACE:include/${TARGET}-${PROJECT_VERSION}>
+                    ${CMAKE_CURRENT_SOURCE_DIR}/lib/wxWidgets/buildurx/lib/wx/include/osx_cocoa-unicode-static-3.3/wx
+                    ${CMAKE_CURRENT_SOURCE_DIR}/lib/wxWidgets/include
 )
 
 # ---- Create an installable target ----
@@ -87,12 +106,11 @@ target_include_directories(
 
 # the location where the project's version header will be placed should match the project's regular
 # header paths
-string(TOLOWER ${PROJECT_NAME}/version.h VERSION_HEADER_LOCATION)
+string(TOLOWER ${TARGET}/version.h VERSION_HEADER_LOCATION)
 
 
 # ---- Generate Documentation ----
-find_package(Doxygen
-             REQUIRED dot)
+find_package(Doxygen REQUIRED dot)
 
 if (DOXYGEN_FOUND)
   message(STATUS "Doxygen found")
@@ -107,11 +125,9 @@ if (DOXYGEN_FOUND)
   )
   set(USE_MDFILE_AS_MAINPAGE YES)
   set(PROJECT_LOGO "${PROJECT_SOURCE_DIR}/logo.png")
+  set(HTML_EXTRA_STYLESHEET "${PROJECT_SOURCE_DIR}/docs/doxygen-awesome-css/doxygen-awesome.css")
 
-  doxygen_add_docs(
-    docs ${PROJECT_SOURCE_DIR}
-  )
+  doxygen_add_docs(docs ${PROJECT_SOURCE_DIR})
 else()
   message(STATUS "Doxygen not found")
 endif()
-
