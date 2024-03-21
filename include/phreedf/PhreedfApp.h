@@ -5,13 +5,23 @@
 #include <spdlog/sinks/basic_file_sink.h>
 #include <cstdlib>
 
-// Declare the application class
+/**
+ * @brief The application class
+ *
+ * This class is the main application class. It is responsible for creating the
+ * main frame of the application and starting the event loop.
+ */
 class MyApp : public wxApp
 {
 public:
-    // Called on application startup
+    /**
+     * @brief Initializes the application
+     *
+     * This function initializes the application. It creates the main frame of the
+     * application and shows it.
+     */
     virtual bool OnInit();
 };
 
-// Implements MyApp& wxGetApp()
+// This macro tells wxWidgets to create an instance of the application class
 DECLARE_APP(MyApp)
