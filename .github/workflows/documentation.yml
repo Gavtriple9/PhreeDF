@@ -33,7 +33,7 @@ jobs:
         run: |
           mkdir -p build
           cd build
-          cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_DOCS=TRUE -DBUILD_EXEC=FALSE..
+          cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_DOCS=TRUE -DBUILD_EXEC=FALSE ..
           make docs
 
       - name: Publish
