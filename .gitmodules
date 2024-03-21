@@ -1,9 +1,6 @@
 [submodule "lib/wxWidgets"]
 	path = lib/wxWidgets
 	url = git@github.com:wxWidgets/wxWidgets.git
-[submodule "docs/doxygen-awesome-css"]
-	path = docs/doxygen-awesome-css
-	url = git@github.com:jothepro/doxygen-awesome-css.git
 [submodule "lib/spdlog"]
 	path = lib/spdlog
 	url = git@github.com:gabime/spdlog.git
