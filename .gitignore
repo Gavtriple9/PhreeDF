@@ -36,11 +36,4 @@ dist/
 *.DS_Store
 .vscode/
 
-
-.github/workflows/documenation.yml
-.github/workflows/examples.yml
-.github/workflows/install.yml
-.github/workflows/macos.yml
-.github/workflows/ubuntu.yml
-.github/workflows/windows.yml
-build/
+lib/*

@@ -35,13 +35,9 @@ if("${CMAKE_SOURCE_DIR}" STREQUAL "${CMAKE_BINARY_DIR}")
 endif()
 
 # ---- Add dependencies ----
-
-# wxWidgets
-add_library(wxWidgets_core STATIC IMPORTED)
-set_target_properties(wxWidgets_core PROPERTIES IMPORTED_LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/libs/wxWidgets/buildurx/lib/libwx_baseu-3.3.a)
-
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/lib/spdlog)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/lib/podofo)
+find_package(wxWidgets REQUIRED)
+find_package(Podofo REQUIRED)
+find_package(spdlog REQUIRED)
 
 # ---- Add source files ----
 
@@ -81,25 +77,45 @@ else()
   set_target_properties(${TARGET} PROPERTIES CXX_STANDARD 17)
 endif()
 
+target_compile_definitions(${TARGET} PUBLIC ${wxWidgets_DEFINITIONS})
+
 # being a cross-platform target, we enforce standards conformance on MSVC
-target_compile_options(${TARGET} PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/permissive->")
-
-# Link dependencies
-target_link_libraries(${TARGET} PRIVATE 
-  wxWidgets_base
-
-  spdlog::spdlog 
-  $<$<BOOL:${MINGW}>:ws2_32>
-
-  ${PODOFO_LIBRARIES}
+target_compile_options(
+  ${TARGET} 
+  PRIVATE 
+    ${WX_CXX_FLAGS_LIST} 
+    ${wxWidgets_CXX_FLAGS} 
+  PUBLIC 
+    "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/permissive->"
 )
+
+# ---- Create source groups for IDEs ----
 
 target_include_directories(
-  ${TARGET} PUBLIC  $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
-                    $<INSTALL_INTERFACE:include/${TARGET}-${PROJECT_VERSION}>
-                    ${CMAKE_CURRENT_SOURCE_DIR}/lib/wxWidgets/buildurx/lib/wx/include/osx_cocoa-unicode-static-3.3/wx
-                    ${CMAKE_CURRENT_SOURCE_DIR}/lib/wxWidgets/include
+  ${TARGET} 
+  PUBLIC  
+    $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
+    $<INSTALL_INTERFACE:include/${TARGET}-${PROJECT_VERSION}>
+    ${wxWidgets_INCLUDE_DIRS}
+    ${Podofo_INCLUDE_DIRS}
+    ${spdlog_INCLUDE_DIRS}
 )
+
+# Link dependencies
+target_link_libraries(
+  ${TARGET} 
+  PRIVATE 
+    # spdlog
+    spdlog::spdlog 
+    $<$<BOOL:${MINGW}>:ws2_32> 
+
+    # podofo
+    ${Podofo_LIBRARIES}
+  
+    # wxWidgets
+    ${wxWidgets_LIBRARIES}
+)
+
 
 # ---- Create an installable target ----
 # this allows users to install and find the library via `find_package()`.
