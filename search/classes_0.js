@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['myapp_0',['MyApp',['../classMyApp.html',1,'']]],
-  ['myframe_1',['MyFrame',['../classMyFrame.html',1,'']]]
+  ['mainframe_0',['MainFrame',['../classMainFrame.html',1,'']]],
+  ['myapp_1',['MyApp',['../classMyApp.html',1,'']]]
 ];
