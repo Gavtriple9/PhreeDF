@@ -1,11 +1,13 @@
+#pragma once
+
 #include "Core.h"
 
 // Declare our main frame class
-class MyFrame : public wxFrame
+class MainFrame : public wxFrame
 {
 public:
     // Constructor
-    MyFrame(const wxString &title);
+    MainFrame(const wxString &title);
     // Event handlers
     void OnQuit(wxCommandEvent &event);
     void OnAbout(wxCommandEvent &event);

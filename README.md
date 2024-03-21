@@ -1,6 +1,6 @@
 # PhreeDF
 
-> A free pdf viewer
+> A free interactive PDF processor
 
 # Project Site
 
