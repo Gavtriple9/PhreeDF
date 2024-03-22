@@ -1,11 +1,11 @@
-#############################################################################
+# ############################################################################
 # Name:        CMakeLists.txt
 # Purpose:     Primary CMake for PhreeDF
 # Author:      Gavin Roberts
 # Created:     2024-03-15
 # Copyright:   (c) 2024 Gavin Roberts
 # License:     MIT License
-#############################################################################
+# ############################################################################
 
 cmake_minimum_required(VERSION 3.14...3.22)
 
@@ -32,7 +32,7 @@ if("${CMAKE_SOURCE_DIR}" STREQUAL "${CMAKE_BINARY_DIR}")
 endif()
 
 if(NOT DEFINED BUILD_EXEC)
-    set(BUILD_EXEC TRUE)
+  set(BUILD_EXEC TRUE)
 endif()
 
 # --- Optionally build the project ---
@@ -45,27 +45,27 @@ if(BUILD_EXEC)
   # ---- Add source files ----
   set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-  set(HEADERS 
+  set(HEADERS
     "${CMAKE_CURRENT_SOURCE_DIR}/include/phreedf.h"
     "${CMAKE_CURRENT_SOURCE_DIR}/include/phreedf/Core.h"
     "${CMAKE_CURRENT_SOURCE_DIR}/include/phreedf/PhreedfApp.h"
     "${CMAKE_CURRENT_SOURCE_DIR}/include/phreedf/MainFrame.h"
   )
 
-  set(SOURCES 
+  set(SOURCES
     "${CMAKE_CURRENT_SOURCE_DIR}/src/PhreedfApp.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/src/MainFrame.cpp"
   )
 
   # --- Add the app icon ---
-  if (APPLE)
+  if(APPLE)
     set(MACOSX_BUNDLE_ICON_FILE ${PROJECT_SOURCE_DIR}/resources/phreedf)
-    set(APP_ICON_MACOSX ${PROJECT_SOURCE_DIR}/resources/phreedf.icns) 
-    set_source_files_properties(${APP_ICON_MACOSX} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources") 
+    set(APP_ICON_MACOSX ${PROJECT_SOURCE_DIR}/resources/phreedf.icns)
+    set_source_files_properties(${APP_ICON_MACOSX} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
   endif()
 
   # ---- Create library ----
-  if (APPLE)
+  if(APPLE)
     add_executable(${TARGET} MACOSX_BUNDLE ${HEADERS} ${SOURCES} ${APP_ICON_MACOSX})
     set_target_properties(${TARGET} PROPERTIES CXX_STANDARD 17 MACOSX_BUNDLE_INFO_PLIST ${PROJECT_SOURCE_DIR}/resources/Info.plist.in)
   else()
@@ -76,58 +76,59 @@ if(BUILD_EXEC)
   # ----- Add compiler definitions and options ----
   target_compile_definitions(${TARGET} PUBLIC ${wxWidgets_DEFINITIONS})
   target_compile_options(
-    ${TARGET} 
-    PRIVATE 
-      ${WX_CXX_FLAGS_LIST} 
-      ${wxWidgets_CXX_FLAGS} 
-    PUBLIC 
-      "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/permissive->"
+    ${TARGET}
+    PRIVATE
+    ${WX_CXX_FLAGS_LIST}
+    ${wxWidgets_CXX_FLAGS}
+    PUBLIC
+    "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/permissive->"
   )
 
   # ---- Add include directories ----
   target_include_directories(
-    ${TARGET} 
-    PUBLIC  
-      $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
-      $<INSTALL_INTERFACE:include/${TARGET}-${PROJECT_VERSION}>
-      ${wxWidgets_INCLUDE_DIRS}
-      ${Podofo_INCLUDE_DIRS}
-      ${spdlog_INCLUDE_DIRS}
+    ${TARGET}
+    PUBLIC
+    $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
+    $<INSTALL_INTERFACE:include/${TARGET}-${PROJECT_VERSION}>
+    ${wxWidgets_INCLUDE_DIRS}
+    ${Podofo_INCLUDE_DIRS}
+    ${spdlog_INCLUDE_DIRS}
   )
 
   # ---- Link libraries ----
   target_link_libraries(
-    ${TARGET} 
-    PRIVATE 
-      # spdlog
-      spdlog::spdlog 
-      $<$<BOOL:${MINGW}>:ws2_32> 
+    ${TARGET}
+    PRIVATE
 
-      # podofo
-      ${Podofo_LIBRARIES}
-    
-      # wxWidgets
-      ${wxWidgets_LIBRARIES}
+    # spdlog
+    spdlog::spdlog
+    $<$<BOOL:${MINGW}>:ws2_32>
+
+    # podofo
+    ${Podofo_LIBRARIES}
+
+    # wxWidgets
+    ${wxWidgets_LIBRARIES}
   )
 endif()
 
 # ---- Optionally generate documentation ----
 if(NOT DEFINED BUILD_DOCS)
-    set(BUILD_DOCS FALSE)
+  set(BUILD_DOCS FALSE)
 endif()
 
-if (BUILD_DOCS)
+if(BUILD_DOCS)
   find_package(Doxygen REQUIRED)
 
-  if (DOXYGEN_FOUND)
+  if(DOXYGEN_FOUND)
     message(STATUS "Doxygen found")
     set(DOXYGEN_GENERATE_HTML YES)
     set(DOXYGEN_GENERATE_MAN NO)
     set(DOXYGEN_GENERATE_LATEX NO)
     set(DOXYGEN_RECURSIVE YES)
-    set(DOXYGEN_EXCLUDE_PATTERNS 
-        "*/lib/*"
-        "*/build/*"
+    set(DOXYGEN_EXCLUDE_PATTERNS
+      "*/lib/*"
+      "*/build/*"
     )
     set(DOXYGEN_USE_MDFILE_AS_MAINPAGE YES)
     set(DOXYGEN_PROJECT_LOGO "${PROJECT_SOURCE_DIR}/logo.png")
