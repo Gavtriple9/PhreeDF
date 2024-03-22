@@ -17,6 +17,7 @@
 
 > [!NOTE]
 > if you are met with `bash: scripts/install_deps.sh: Permission denied`
+> 
 > run `chmod +x scripts/install_deps.sh` to make the script executable
 
 5. `mkdir build` and `cd build` to create the build directory
