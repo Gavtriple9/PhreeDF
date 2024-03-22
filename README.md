@@ -14,9 +14,11 @@
 2. `cd phreedf`
 3. `git submodule update --init --recursive` to clone the submodules
 4. run `scripts/install_deps.sh` to install the dependencies
-    > [!NOTE]
-    > if you are met with `bash: scripts/install_deps.sh: Permission denied`
-    > run `chmod +x scripts/install_deps.sh` to make the script executable
+
+> [!NOTE]
+> if you are met with `bash: scripts/install_deps.sh: Permission denied`
+> run `chmod +x scripts/install_deps.sh` to make the script executable
+
 5. `mkdir build` and `cd build` to create the build directory
 6. run `cmake .. && make -j $(nproc)`
 
