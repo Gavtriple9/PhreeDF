@@ -1,23 +1,27 @@
 #include <phreedf/PhreedfApp.hpp>
 
-bool PhreedfApp::OnInit()
+namespace phdf
 {
-    // Set up file sink
-    auto file_sink = std::make_shared<spdlog::sinks::basic_file_sink_mt>(GetStandardLogFolder() + "phreedf.log", true);
-    auto logger = std::make_shared<spdlog::logger>(spdlog::logger("phreedf", {file_sink}));
-    logger->flush_on(spdlog::level::trace);
+    bool PhreedfApp::OnInit()
+    {
+        // Set up file sink
+        auto file_sink = std::make_shared<spdlog::sinks::basic_file_sink_mt>(GetStandardLogFolder() + "phreedf.log", true);
+        auto logger = std::make_shared<spdlog::logger>(spdlog::logger("phreedf", {file_sink}));
+        logger->flush_on(spdlog::level::trace);
 
-    // Set the global logger to use the file sink
-    spdlog::register_logger(logger);
-    spdlog::set_default_logger(logger);
-    spdlog::set_level(spdlog::level::debug);
+        // Set the global logger to use the file sink
+        spdlog::register_logger(logger);
+        spdlog::set_default_logger(logger);
+        spdlog::set_level(spdlog::level::debug);
 
-    // Create the main application window
-    MainFrame *frame = new MainFrame(wxT("Phreedf - The Free PDF Editor"));
-    // Show it
-    frame->Show(true);
-    // Start the event loop
-    return true;
-}
+        // Create the main application window
+        MainFrame *frame = new MainFrame(wxT("Phreedf - The Free PDF Editor"));
+        // Show it
+        frame->Show(true);
+        // Start the event loop
+        return true;
+    }
 
-IMPLEMENT_APP(PhreedfApp)
+} // namespace phdf
+
+IMPLEMENT_APP(phdf::PhreedfApp)

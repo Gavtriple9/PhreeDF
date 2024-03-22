@@ -1,7 +1,7 @@
 #pragma once
 #include "phreedf/Core.hpp"
 
-namespace pf
+namespace phdf
 {
     bool is_installed();
 }
