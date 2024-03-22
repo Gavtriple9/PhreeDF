@@ -18,9 +18,8 @@
 6. run `cmake .. && make -j $(nproc)`
 
 > [!NOTE]
-> if you are met with `bash: scripts/install_deps.sh: Permission denied`
-> 
-> run `chmod +x scripts/install_deps.sh` to make the script executable
+> If you are met with `bash: scripts/install_deps.sh: Permission denied`.  
+> Run `chmod +x scripts/install_deps.sh` to make the script executable.
 
 ### Windows
 
