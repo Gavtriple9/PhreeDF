@@ -35,7 +35,7 @@ if(NOT DEFINED BUILD_EXEC)
     set(BUILD_EXEC TRUE)
 endif()
 
-# --- if BUILD is set to TRUE, then we will build the project ---
+# --- Optionally build the project ---
 if(BUILD_EXEC)
   # ---- Add dependencies ----
   find_package(wxWidgets REQUIRED)
@@ -111,7 +111,7 @@ if(BUILD_EXEC)
   )
 endif()
 
-# ---- Generate Documentation ----
+# ---- Optionally generate documentation ----
 if(NOT DEFINED BUILD_DOCS)
     set(BUILD_DOCS FALSE)
 endif()
@@ -137,4 +137,13 @@ if (BUILD_DOCS)
   else()
     message(STATUS "Doxygen not found")
   endif()
+endif()
+
+# ---- Optionally generate tests ----
+if(NOT DEFINED BUILD_TESTS)
+    set(BUILD_TESTS TRUE)
+endif()
+
+if (BUILD_TESTS)
+  include(tests/CMakeLists.txt)
 endif()
