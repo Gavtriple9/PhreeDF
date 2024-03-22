@@ -1,4 +1,4 @@
-#include <phreedf/PhreedfApp.h>
+#include <phreedf/PhreedfApp.hpp>
 
 std::string GetStandardLogFolder()
 {

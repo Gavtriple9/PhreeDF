@@ -47,9 +47,9 @@ if(BUILD_EXEC)
 
   set(HEADERS
     "${CMAKE_CURRENT_SOURCE_DIR}/include/phreedf.h"
-    "${CMAKE_CURRENT_SOURCE_DIR}/include/phreedf/Core.h"
-    "${CMAKE_CURRENT_SOURCE_DIR}/include/phreedf/PhreedfApp.h"
-    "${CMAKE_CURRENT_SOURCE_DIR}/include/phreedf/MainFrame.h"
+    "${CMAKE_CURRENT_SOURCE_DIR}/include/phreedf/Core.hpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/include/phreedf/PhreedfApp.hpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/include/phreedf/MainFrame.hpp"
   )
 
   set(SOURCES
@@ -142,9 +142,9 @@ endif()
 
 # ---- Optionally generate tests ----
 if(NOT DEFINED BUILD_TESTS)
-    set(BUILD_TESTS TRUE)
+  set(BUILD_TESTS TRUE)
 endif()
 
-if (BUILD_TESTS)
+if(BUILD_TESTS)
   include(tests/CMakeLists.txt)
 endif()

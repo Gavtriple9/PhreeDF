@@ -1,5 +1,5 @@
 #pragma once
-#include "phreedf/Core.h"
+#include "phreedf/Core.hpp"
 
 namespace pf
 {

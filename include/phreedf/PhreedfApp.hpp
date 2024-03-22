@@ -1,9 +1,10 @@
 #pragma once
 
-#include "Core.h"
-#include "MainFrame.h"
 #include <spdlog/sinks/basic_file_sink.h>
-#include <cstdlib>
+
+#include "Core.hpp"
+#include "MainFrame.hpp"
+#include "utils/Utils.hpp"
 
 /**
  * @brief The application class
@@ -15,7 +16,7 @@ class PhreedfApp : public wxApp
 {
 public:
     /**
-     * @brief Initializes the application
+     * @brief Initializes the application.
      *
      * This function initializes the application. It creates the main frame of the
      * application and shows it.

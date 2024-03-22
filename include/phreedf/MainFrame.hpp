@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Core.h"
+#include "Core.hpp"
 
 /** \brief Main frame of the application
  *
