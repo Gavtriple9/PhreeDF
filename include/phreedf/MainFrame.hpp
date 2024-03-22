@@ -2,7 +2,7 @@
 
 #include "Core.hpp"
 
-/** \brief Main frame of the application
+/** @brief Main frame of the application
  *
  * This class is the main frame of the application. It contains the main window
  * and all the widgets that are displayed in it.
@@ -10,7 +10,7 @@
 class MainFrame : public wxFrame
 {
 public:
-    /** \brief Constructor
+    /** @brief Constructor
      *
      * This constructor creates the main frame of the application.
      */

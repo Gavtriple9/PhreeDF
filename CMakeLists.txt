@@ -50,11 +50,15 @@ if(BUILD_EXEC)
     "${CMAKE_CURRENT_SOURCE_DIR}/include/phreedf/Core.hpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/include/phreedf/PhreedfApp.hpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/include/phreedf/MainFrame.hpp"
+
+    "${CMAKE_CURRENT_SOURCE_DIR}/include/phreedf/utils/File.hpp"
   )
 
   set(SOURCES
     "${CMAKE_CURRENT_SOURCE_DIR}/src/PhreedfApp.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/src/MainFrame.cpp"
+
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/utils/File.cpp"
   )
 
   # --- Add the app icon ---
