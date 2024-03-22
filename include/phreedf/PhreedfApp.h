@@ -11,7 +11,7 @@
  * This class is the main application class. It is responsible for creating the
  * main frame of the application and starting the event loop.
  */
-class MyApp : public wxApp
+class PhreedfApp : public wxApp
 {
 public:
     /**
@@ -24,4 +24,4 @@ public:
 };
 
 // This macro tells wxWidgets to create an instance of the application class
-DECLARE_APP(MyApp)
+DECLARE_APP(PhreedfApp)

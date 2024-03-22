@@ -17,7 +17,7 @@ std::string GetStandardLogFolder()
     return logsDir + appName;
 }
 
-bool MyApp::OnInit()
+bool PhreedfApp::OnInit()
 {
     // Set up file sink
     auto file_sink = std::make_shared<spdlog::sinks::basic_file_sink_mt>(GetStandardLogFolder() + "phreedf.log", true);
@@ -37,4 +37,4 @@ bool MyApp::OnInit()
     return true;
 }
 
-IMPLEMENT_APP(MyApp)
+IMPLEMENT_APP(PhreedfApp)
