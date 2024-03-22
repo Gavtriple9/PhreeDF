@@ -129,7 +129,7 @@ if (BUILD_DOCS)
         "*/lib/*"
         "*/build/*"
     )
-    set(DOXYGEN_USE_MDFILE_AS_MAINPAGE YES)
+    set(DOXYGEN_USE_MDFILE_AS_MAINPAGE "${PROJECT_SOURCE_DIR}/README.md")
     set(DOXYGEN_PROJECT_LOGO "${PROJECT_SOURCE_DIR}/logo.png")
     set(DOXYGEN_HTML_EXTRA_STYLESHEET "${PROJECT_SOURCE_DIR}/docs/doxygen-awesome-css/doxygen-awesome.css")
 
