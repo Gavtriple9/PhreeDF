@@ -18,6 +18,8 @@ namespace phdf
         MainFrame *frame = new MainFrame(wxT("Phreedf - The Free PDF Editor"));
         // Show it
         frame->Show(true);
+        DisplayDebugPDFInfo();
+
         // Start the event loop
         return true;
     }

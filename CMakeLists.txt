@@ -39,8 +39,11 @@ endif()
 if(BUILD_EXEC)
   # ---- Add dependencies ----
   find_package(wxWidgets REQUIRED)
-  find_package(Podofo REQUIRED)
   find_package(spdlog REQUIRED)
+
+  set(PODOFO_BUILD_LIB_ONLY TRUE CACHE BOOL "" FORCE)
+  set(PODOFO_BUILD_STATIC TRUE CACHE BOOL "" FORCE)
+  add_subdirectory(${PROJECT_SOURCE_DIR}/lib/podofo)
 
   # ---- Add source files ----
   set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -52,6 +55,9 @@ if(BUILD_EXEC)
     "${CMAKE_CURRENT_SOURCE_DIR}/include/phreedf/MainFrame.hpp"
 
     "${CMAKE_CURRENT_SOURCE_DIR}/include/phreedf/utils/File.hpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/include/phreedf/utils/ToString.hpp"
+
+    "${CMAKE_CURRENT_SOURCE_DIR}/include/phreedf/debug/DisplayPdfInfo.hpp"
   )
 
   set(SOURCES
@@ -59,6 +65,9 @@ if(BUILD_EXEC)
     "${CMAKE_CURRENT_SOURCE_DIR}/src/MainFrame.cpp"
 
     "${CMAKE_CURRENT_SOURCE_DIR}/src/utils/File.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/utils/ToString.cpp"
+
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/debug/DisplayPdfInfo.cpp"
   )
 
   # --- Add the app icon ---
@@ -88,6 +97,8 @@ if(BUILD_EXEC)
     "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/permissive->"
   )
 
+  message(STATUS "Podofo_INCLUDE_DIRS: ${Podofo_INCLUDE_DIRS}")
+
   # ---- Add include directories ----
   target_include_directories(
     ${TARGET}
@@ -95,9 +106,10 @@ if(BUILD_EXEC)
     $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
     $<INSTALL_INTERFACE:include/${TARGET}-${PROJECT_VERSION}>
     ${wxWidgets_INCLUDE_DIRS}
-    ${Podofo_INCLUDE_DIRS}
     ${spdlog_INCLUDE_DIRS}
   )
+
+  message(STATUS "Podofo_LIBRARIES: ${Podofo_LIBRARIES}")
 
   # ---- Link libraries ----
   target_link_libraries(
@@ -108,11 +120,11 @@ if(BUILD_EXEC)
     spdlog::spdlog
     $<$<BOOL:${MINGW}>:ws2_32>
 
-    # podofo
-    ${Podofo_LIBRARIES}
-
     # wxWidgets
     ${wxWidgets_LIBRARIES}
+
+    # podofo
+    podofo::podofo
   )
 endif()
 

@@ -1,10 +1,12 @@
 #pragma once
 
 #include <spdlog/sinks/basic_file_sink.h>
+#include <spdlog/sinks/stdout_sinks.h>
 
 #include "Core.hpp"
 #include "MainFrame.hpp"
 #include "utils/File.hpp"
+#include "debug/DisplayPdfInfo.hpp"
 
 namespace phdf
 {

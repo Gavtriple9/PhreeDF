@@ -7,6 +7,7 @@
 
 #include <wx/wx.h>
 #include <spdlog/spdlog.h>
+#include <podofo/podofo.h>
 
 // If on Windows, define the PHREEDF_API macro
 // clang-format off
