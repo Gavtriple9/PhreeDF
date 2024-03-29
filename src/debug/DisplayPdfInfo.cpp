@@ -61,7 +61,16 @@ namespace phdf
         spdlog::info("\t Object: \n{}EndObject\n", pages.GetObject().ToString());
         for (int i = 0; i < pages_count; i++)
         {
-            PoDoFo::PdfPage &page = pages.GetPageAt(i);
+            auto &page = pages.GetPageAt(i);
+            auto &resources = page.MustGetResources();
+            auto imageObj = resources.GetResource("XObject", "XOb5");
+            std::unique_ptr<PoDoFo::PdfImage> image;
+            if (imageObj && PoDoFo::PdfXObject::TryCreateFromObject<PoDoFo::PdfImage>(*imageObj, image))
+            {
+                PoDoFo::charbuff buffer;
+                image->DecodeTo(buffer, PoDoFo::PdfPixelFormat::BGRA);
+                SaveFramePng(buffer.data(), PoDoFo::PdfPixelFormat::BGRA, image->GetWidth(), image->GetHeight());
+            }
             spdlog::info("\t Page-{}:", i);
             spdlog::info("\t {{");
             spdlog::info("\t\t Dictionary: {}", page.GetDictionary().ToString());
