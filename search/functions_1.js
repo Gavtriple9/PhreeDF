@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['onabout_0',['OnAbout',['../classMainFrame.html#aa6cb4bffa152fb2adad782a440af5de2',1,'MainFrame']]],
-  ['onbuttonok_1',['OnButtonOK',['../classMainFrame.html#aaacc5876a57c67ce85d8aac220064404',1,'MainFrame']]],
-  ['oninit_2',['OnInit',['../classPhreedfApp.html#ac0809811395e1aa0b83151014eb40f26',1,'PhreedfApp']]],
-  ['onquit_3',['OnQuit',['../classMainFrame.html#a6c21335bf2a3393f54b46889c8a559e5',1,'MainFrame']]],
-  ['onsize_4',['OnSize',['../classMainFrame.html#a8fd9580d3191784843f34269810a676b',1,'MainFrame']]]
+  ['onabout_0',['OnAbout',['../classphdf_1_1MainFrame.html#aebd799d8428b6d1c1959b1e4c0b11444',1,'phdf::MainFrame']]],
+  ['onbuttonok_1',['OnButtonOK',['../classphdf_1_1MainFrame.html#a813c24ce75f777a4bfdbba0e524186f5',1,'phdf::MainFrame']]],
+  ['oninit_2',['OnInit',['../classphdf_1_1PhreedfApp.html#a8b959bc2fe7a813945472729cf6cf394',1,'phdf::PhreedfApp']]],
+  ['onquit_3',['OnQuit',['../classphdf_1_1MainFrame.html#a7831278001493715264e70968d3c7d9d',1,'phdf::MainFrame']]],
+  ['onsize_4',['OnSize',['../classphdf_1_1MainFrame.html#a09965d3c1b194a1c99e43c1438dda385',1,'phdf::MainFrame']]]
 ];

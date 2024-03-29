@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['mainframe_0',['MainFrame',['../classMainFrame.html#a00c85521dad6b24000967206bcc53688',1,'MainFrame']]]
+  ['mainframe_0',['MainFrame',['../classphdf_1_1MainFrame.html#adb0830f36e99fb482068e1775322a7fb',1,'phdf::MainFrame']]]
 ];

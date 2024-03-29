@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['phreedfapp_0',['PhreedfApp',['../classPhreedfApp.html',1,'']]]
+  ['mainframe_0',['MainFrame',['../classphdf_1_1MainFrame.html',1,'phdf']]]
 ];
