@@ -20,14 +20,18 @@ cd ..
 mkdir -p podofo_build
 cd podofo_build
 cmake \
-  -DPODOFO_BUILD_STATIC=TRUE \
   -DCMAKE_BUILD_TYPE=Debug \
+  -DPODOFO_BUILD_STATIC=ON \
+  -DCMAKE_FIND_FRAMEWORK=NEVER \
+  -DCMAKE_PREFIX_PATH=`brew --prefix` \
+  -DFontconfig_INCLUDE_DIR=`brew --prefix fontconfig`/include \
+  -DOPENSSL_ROOT_DIR=`brew --prefix openssl@3` \
   ../podofo 
 make -j $(nproc)
 make install
 cd ..
 
-# # Build spdlog
+# Build spdlog
 mkdir -p spdlog_build
 cd spdlog_build
 cmake \
@@ -36,4 +40,3 @@ cmake \
 make -j $(nproc)
 make install
 cd ..
-
