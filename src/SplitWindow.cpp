@@ -39,7 +39,16 @@ namespace phdf
         parent->SetMenuBar(menuBar);
     }
 
-    void SplitWindow::OnUnsplit()
+    void SplitWindow::SplitVertical()
+    {
+        if (IsSplit())
+            Unsplit();
+        m_leftWindow->Show(true);
+        m_rightWindow->Show(true);
+        SplitVertically(m_leftWindow, m_rightWindow);
+    }
+
+    void SplitWindow::Unsplit()
     {
         if (IsSplit())
             Unsplit();
