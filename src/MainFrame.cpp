@@ -1,5 +1,6 @@
 #include <phreedf/MainFrame.hpp>
 #include <phreedf/SplitWindow.hpp>
+#include "images/logo.xpm"
 
 namespace phdf
 {
@@ -21,6 +22,18 @@ namespace phdf
 
         CreateStatusBar(2);
         SetStatusText(wxT("Welcome to PhreeDF!"));
+
+        // Create a Toolbar
+        auto *toolBar = new wxToolBar(this, wxID_ANY,
+                                      wxDefaultPosition, wxDefaultSize, wxTB_HORIZONTAL | wxNO_BORDER);
+        wxBitmap bmpOpen(logo_xpm);
+        wxBitmap bmpSave(logo_xpm);
+        toolBar->AddCheckTool(wxID_OPEN, wxT("Open"), bmpOpen);
+        toolBar->AddCheckTool(wxID_SAVE, wxT("Save"), bmpSave);
+        toolBar->AddSeparator();
+        toolBar->Realize();
+
+        SetToolBar(toolBar);
 
         // Create a child window
         auto splitWindow = new SplitWindow(this);

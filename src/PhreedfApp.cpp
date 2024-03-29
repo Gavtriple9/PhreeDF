@@ -15,7 +15,7 @@ namespace phdf
         spdlog::set_level(spdlog::level::debug);
 
         // Create the main application window
-        MainFrame *frame = new MainFrame(wxT("Phreedf - The Free PDF Editor"));
+        MainFrame *frame = new MainFrame(wxT("Phreedf"));
 
         // Show it
         frame->Show(true);

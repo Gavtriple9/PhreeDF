@@ -9,11 +9,15 @@ namespace phdf
         m_leftWindow = new wxScrolledWindow(this, wxID_ANY);
         m_rightWindow = new wxScrolledWindow(this, wxID_ANY);
 
-        m_leftWindow->SetScrollbars(20, 20, 50, 50);
+        // m_leftWindow->SetScrollbars(20, 20, 50, 50);
         m_rightWindow->SetScrollbars(20, 20, 50, 50);
         // m_rightWindow->Show(false);
 
-        SetMinimumPaneSize(200);
+        m_leftWindow->SetMinSize(wxSize(200, 200));
+        m_leftWindow->SetVirtualSize(200, 200);
+        m_leftWindow->SetScrollRate(1, 1);
+
+        SetMinimumPaneSize(2);
 
         m_leftWindow->Show(true);
         m_rightWindow->Show(true);
