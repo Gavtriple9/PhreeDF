@@ -16,6 +16,7 @@ namespace phdf
 
         // Create the main application window
         MainFrame *frame = new MainFrame(wxT("Phreedf - The Free PDF Editor"));
+
         // Show it
         frame->Show(true);
         DisplayDebugPDFInfo();

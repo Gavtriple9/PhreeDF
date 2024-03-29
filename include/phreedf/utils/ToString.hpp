@@ -1,3 +1,5 @@
+#pragma once
+
 #include "../Core.hpp"
 #include <podofo/main/PdfMetadata.h>
 

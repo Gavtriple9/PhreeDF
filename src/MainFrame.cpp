@@ -1,9 +1,10 @@
 #include <phreedf/MainFrame.hpp>
+#include <phreedf/SplitWindow.hpp>
 
 namespace phdf
 {
     MainFrame::MainFrame(const wxString &title)
-        : wxFrame(NULL, wxID_ANY, title)
+        : wxFrame(NULL, wxID_ANY, title, wxDefaultPosition, wxSize(1000, 800))
     {
         // Create a menu bar
         wxMenu *fileMenu = new wxMenu;
@@ -19,15 +20,27 @@ namespace phdf
         SetMenuBar(menuBar);
 
         CreateStatusBar(2);
-        SetStatusText(wxT("Welcome to wxWidgets !"));
+        SetStatusText(wxT("Welcome to PhreeDF!"));
+
+        // Create a child window
+        auto splitWindow = new SplitWindow(this);
+        splitWindow->Show(true);
+
+        splitWindow->OnSplitVertical();
+
+        // Add child window to sizer
+        auto sizer = new wxBoxSizer(wxVERTICAL);
+        sizer->Add(splitWindow, 1, wxEXPAND);
+        SetSizer(sizer);
+        Layout();
     }
 
     void MainFrame::OnAbout(wxCommandEvent &event)
     {
         wxString msg;
         msg.Printf(wxT("Hello and welcome to % s"),
-                   wxVERSION_STRING);
-        wxMessageBox(msg, wxT("About Minimal"),
+                   phdfVERSION_STRING);
+        wxMessageBox(msg, wxT("About PhreeDF"),
                      wxOK | wxICON_INFORMATION, this);
     }
 
@@ -35,13 +48,6 @@ namespace phdf
     {
         // Destroy the frame
         Close();
-    }
-    void MainFrame::OnSize(wxSizeEvent &event)
-    {
-        wxSize size = event.GetSize();
-        wxString msg;
-        msg.Printf(wxT("Size: %d x %d"), size.x, size.y);
-        SetStatusText(msg);
     }
 
     void MainFrame::OnButtonOK(wxCommandEvent &event)
@@ -57,7 +63,6 @@ namespace phdf
 BEGIN_EVENT_TABLE(phdf::MainFrame, wxFrame)
     EVT_MENU(wxID_ABOUT, phdf::MainFrame::OnAbout)
     EVT_MENU(wxID_EXIT, phdf::MainFrame::OnQuit)
-    EVT_SIZE(phdf::MainFrame::OnSize)
     EVT_BUTTON(wxID_OK, phdf::MainFrame::OnButtonOK)
 END_EVENT_TABLE()
 // clang-format on

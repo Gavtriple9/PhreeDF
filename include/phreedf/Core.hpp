@@ -21,3 +21,5 @@
     #define PHREEDF_API
 #endif
 // clang-format on
+
+#define phdfVERSION_STRING "PhreeDF 0.1.0"

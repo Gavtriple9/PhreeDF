@@ -18,4 +18,9 @@ namespace phdf
 
         return logsDir + appName;
     }
+
+    void SaveFramePng(const char *buffer, PoDoFo::PdfPixelFormat format, int width, int height)
+    {
+        return;
+    }
 } // namespace phdf

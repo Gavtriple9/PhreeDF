@@ -53,6 +53,7 @@ if(BUILD_EXEC)
     "${CMAKE_CURRENT_SOURCE_DIR}/include/phreedf/Core.hpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/include/phreedf/PhreedfApp.hpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/include/phreedf/MainFrame.hpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/include/phreedf/SplitWindow.hpp"
 
     "${CMAKE_CURRENT_SOURCE_DIR}/include/phreedf/utils/File.hpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/include/phreedf/utils/ToString.hpp"
@@ -63,6 +64,7 @@ if(BUILD_EXEC)
   set(SOURCES
     "${CMAKE_CURRENT_SOURCE_DIR}/src/PhreedfApp.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/src/MainFrame.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/SplitWindow.cpp"
 
     "${CMAKE_CURRENT_SOURCE_DIR}/src/utils/File.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/src/utils/ToString.cpp"
