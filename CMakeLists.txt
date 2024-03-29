@@ -147,6 +147,7 @@ if(BUILD_DOCS)
     set(DOXYGEN_EXCLUDE_PATTERNS
       "*/lib/*"
       "*/build/*"
+      "*/extern/*"
     )
     set(DOXYGEN_USE_MDFILE_AS_MAINPAGE YES)
     set(DOXYGEN_PROJECT_LOGO "${PROJECT_SOURCE_DIR}/logo.png")
