@@ -1,5 +1,8 @@
 var searchData=
 [
-  ['macos_20and_20linux_0',['MacOS and Linux',['../md_README.html#autotoc_md3',1,'']]],
-  ['mainframe_1',['MainFrame',['../classphdf_1_1MainFrame.html',1,'phdf::MainFrame'],['../classphdf_1_1MainFrame.html#adb0830f36e99fb482068e1775322a7fb',1,'phdf::MainFrame::MainFrame()']]]
+  ['onabout_0',['OnAbout',['../classphdf_1_1MainFrame.html#aebd799d8428b6d1c1959b1e4c0b11444',1,'phdf::MainFrame']]],
+  ['onbuttonok_1',['OnButtonOK',['../classphdf_1_1MainFrame.html#a813c24ce75f777a4bfdbba0e524186f5',1,'phdf::MainFrame']]],
+  ['oninit_2',['OnInit',['../classphdf_1_1PhreedfApp.html#a8b959bc2fe7a813945472729cf6cf394',1,'phdf::PhreedfApp']]],
+  ['onquit_3',['OnQuit',['../classphdf_1_1MainFrame.html#a7831278001493715264e70968d3c7d9d',1,'phdf::MainFrame']]],
+  ['onsize_4',['OnSize',['../classphdf_1_1MainFrame.html#a09965d3c1b194a1c99e43c1438dda385',1,'phdf::MainFrame']]]
 ];
